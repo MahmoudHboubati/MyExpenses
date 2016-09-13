@@ -1,0 +1,22 @@
+<!-- <div class="list">
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">Amount</span>
+    <input type="number" placeholder="John" [(ngModel)]="amount">
+  </label>
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">At</span>
+    <input type="date" placeholder="Suhr" [(ngModel)]="at">
+  </label>
+</div> -->
+
+<ion-list>
+  <ion-item>
+    <ion-label primary>Amount</ion-label>
+    <ion-input type="number" placeholder="Text Input" [(ngModel)]="amount"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>At</ion-label>
+    <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="at"></ion-datetime>
+  </ion-item>
+  <button (click)="addNew()">Add</button>
+</ion-list>
