@@ -24,7 +24,8 @@ export class NewExpensesComponent {
       amount: this.amount,
       at: this.at,
       createdAt: new Date(),
-      isActive: true
+      isActive: true,
+      createdBy: '0'
     };
     this._expensesService.add(item);
   }

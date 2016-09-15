@@ -1,4 +1,5 @@
 export interface IGenericEntity {
+  createdBy: string;
   createdAt: Date;
   isActive: boolean;
 }

@@ -7,6 +7,7 @@ export interface IFirebaseEntityList<T> {
 }
 
 export class FirebaseEntity implements IFirebaseEntity {
+  createdBy: string;
   createdAt: Date;
   isActive: boolean;
 }

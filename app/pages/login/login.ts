@@ -5,7 +5,8 @@ import { NavController, Page, ViewController, NavParams} from 'ionic-angular';
 import { Validators } from '@angular/common';
 import { REACTIVE_FORM_DIRECTIVES, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
-import {AuthService} from '../../core/services/auth.service';
+import {AuthService, IUserInfo} from '../../core/services/auth.service';
+import {TabsPage} from '../tabs/tabs';
 
 @Component({
   templateUrl: 'build/pages/login/login.html',
@@ -16,11 +17,13 @@ export class LoginPage {
   error: any
   af: any
   loginForm: FormGroup;
+  userInfo: IUserInfo;
 
   constructor(public viewCtrl: ViewController,
     builder: FormBuilder,
     public _params: NavParams,
-    private _authService: AuthService) {
+    private _authService: AuthService,
+    private _navCtrl: NavController) {
 
     // // HAD TO HACK IN THE AngularFire object... :-(
     // this.af = _params.get("af");
@@ -56,58 +59,17 @@ export class LoginPage {
   registerUser(_credentials, _event) {
     _event.preventDefault();
 
-    this.af.auth.createUser(_credentials)
-      .then((user) => {
-        console.log(`Create User Success:`, user);
-        _credentials.created = true;
-
-        return this.login(_credentials, _event);
-      })
-      .catch(e => console.error(`Create User Failure:`, e));
+    this._authService.registerUser(_credentials, this.registerSucceded, this.registerError);
   }
 
-  registerUserWithGitHub(_credentials, _event) {
-    _event.preventDefault();
+  registerSucceded(userInfo: IUserInfo) {
 
-    this.af.auth.login({
-      provider: AuthProviders.Github,
-      method: AuthMethods.Popup
-    }).then((value) => {
-      this.dismiss()
-    }).catch((error) => {
-      this.error = error
-      console.log(error)
-    });
   }
 
-  registerUserWithTwitter(_credentials, _event) {
-    _event.preventDefault();
+  registerError(error) {
 
-    this.af.auth.login({
-      provider: AuthProviders.Twitter,
-      method: AuthMethods.Redirect
-    }).then((authData) => {
-      console.log(authData)
-
-      // already has user... need better info??
-      if (!authData) {
-        this.dismiss()
-      }
-
-      const itemObservable = this.af.database.object('/users/' + authData.uid);
-      itemObservable.set({
-        "provider": authData.auth.providerData[0].providerId,
-        "avatar": authData.auth.photoURL || "MISSING",
-        "displayName": authData.auth.providerData[0].displayName || authData.auth.email,
-      })
-
-    }).then((value) => {
-      this.dismiss()
-    }).catch((error) => {
-      this.error = error
-      console.log(error)
-    });
   }
+
   /**
    * this logs in the user using the form credentials.
    *
@@ -125,9 +87,18 @@ export class LoginPage {
     let addUser = credentials.created;
     credentials.created = null;
 
-    console.log(credentials, addUser);
+    // console.log('hi')
+    // console.log(credentials, addUser);
 
-    this._authService.login(credentials, addUser);
+    this._authService.login(credentials, addUser, this.loggedInSucceeded, this.loginFailed);
+  }
 
+  loginFailed(error) {
+    // this.notAbleToLogin = error.
+  }
+
+  loggedInSucceeded(userInfo: IUserInfo) {
+    this.userInfo = userInfo;
+    this._navCtrl.push(TabsPage);
   }
 }
