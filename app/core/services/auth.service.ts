@@ -29,9 +29,8 @@ export class AuthService {
       // this.dismiss()
     }).catch((error) => {
       // this.error = error
-      console.log(error)
+      console.log(error);
     });
-
   }
 
   public isAuthenticated(authenticated: Function, notAuthenticated: Function) {

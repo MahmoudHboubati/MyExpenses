@@ -1,0 +1,11 @@
+<ion-list>
+  <ion-item>
+    <ion-label primary>Amount</ion-label>
+    <ion-input type="number" placeholder="Text Input" [(ngModel)]="amount"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>At</ion-label>
+    <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="at"></ion-datetime>
+  </ion-item>
+  <button (click)="addNew()">Add</button>
+</ion-list>
