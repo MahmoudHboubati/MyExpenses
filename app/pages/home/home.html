@@ -1,29 +1,44 @@
-<ion-header>
-  <ion-navbar>
-    <button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
-</ion-header>
+<ion-navbar *navbar>
+    <ion-title>
+        Angular Fire Test App
+    </ion-title>
+    <ion-buttons end>
+        <button (click)="logoutClicked()">
+            <ion-icon name="contact"></ion-icon>
+            {{buttonTitle}}
+        </button>
+    </ion-buttons>
+</ion-navbar>
 
-<ion-content padding class="home">
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>app/</code> directory to add or change tabs, update any existing page or create new pages.
-  </p>
-  <ion-card class="info" *ngFor="let item of expenses | async">
-    <ion-card-content>{{item.at}}</ion-card-content>
-  </ion-card>
-  <new-expenses></new-expenses>
-  <div padding>
-    <button block (click)="logout()">Logout</button>
-  </div>
-  <div>
-    <canvas id="myChart" [chData]="data" chart width="400" height="400"></canvas>
-  </div>
-
+<ion-content class="home">
+    <ion-item>
+        <ion-row>
+            <ion-col width-80 style="margin-top:8px">
+                <div *ngIf="displayName">You are logged in as {{authInfo && displayName}}</div>
+                <div *ngIf="!displayName">Please log in</div>
+            </ion-col>
+            <ion-col width-20>
+                <button (click)="addNewItemClicked()">Add Item</button>
+            </ion-col>
+        </ion-row>
+    </ion-item>
+    <ion-card *ngFor="let item of textItems | async">
+        <ion-card-header>
+            {{item.title}}
+        </ion-card-header>
+        <ion-card-content>
+            {{item.description}} - {{ item.timestamp | MomentDate:"LLL"}}
+        </ion-card-content>
+    </ion-card>
+    <ion-card *ngFor="let user of usersWithMessages | async">
+        <ion-card-header>
+            {{user.displayName}}
+        </ion-card-header>
+        <ion-card-content>
+            {{ (user.messages | async) | json}}
+        </ion-card-content>
+    </ion-card>
+    <ion-card class="info" *ngFor="let item of expenses | async">
+        <ion-card-content>{{item.at}}</ion-card-content>
+    </ion-card>
 </ion-content>

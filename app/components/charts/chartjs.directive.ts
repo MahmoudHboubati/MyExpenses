@@ -1,5 +1,4 @@
-import 'chart.js';
-declare let Chart;
+import * as Chart from 'chart.js';
 import {Directive, ElementRef, Renderer, Input} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {IChartData} from './chartjs.data';
@@ -27,10 +26,10 @@ export class ChartDirective {
   }
 
   ngAfterViewInit() {
-    var myArray = this.chData.subscribe((array) => {
-      var data = this.buildChartData(array);
-      this.renderTheChart(data);
-    });
+    // var myArray = this.chData.subscribe((array) => {
+    //   var data = this.buildChartData(array);
+    //   this.renderTheChart(data);
+    // });
   }
 
   buildChartData(array) {
