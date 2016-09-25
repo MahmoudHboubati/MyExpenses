@@ -1,17 +1,18 @@
 <ion-navbar *navbar>
-    <ion-title>
-        Angular Fire Test App
-    </ion-title>
-    <ion-buttons end>
-        <button (click)="logoutClicked()">
+  <ion-title>
+    Angular Fire Test App
+  </ion-title>
+  <ion-buttons end>
+    <button (click)="logoutClicked()">
             <ion-icon name="contact"></ion-icon>
             {{buttonTitle}}
         </button>
-    </ion-buttons>
+  </ion-buttons>
 </ion-navbar>
 
 <ion-content class="home">
-    <ion-item>
+  <new-planned-expenses></new-planned-expenses>
+  <!-- <ion-item>
         <ion-row>
             <ion-col width-80 style="margin-top:8px">
                 <div *ngIf="displayName">You are logged in as {{authInfo && displayName}}</div>
@@ -40,5 +41,5 @@
     </ion-card>
     <ion-card class="info" *ngFor="let item of expenses | async">
         <ion-card-content>{{item.at}}</ion-card-content>
-    </ion-card>
+    </ion-card> -->
 </ion-content>

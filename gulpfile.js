@@ -1,8 +1,8 @@
 var gulp = require('gulp'),
-    gulpWatch = require('gulp-watch'),
-    del = require('del'),
-    runSequence = require('run-sequence'),
-    argv = process.argv;
+  gulpWatch = require('gulp-watch'),
+  del = require('del'),
+  runSequence = require('run-sequence'),
+  argv = process.argv;
 
 
 /**
@@ -33,29 +33,41 @@ var copyHTML = require('ionic-gulp-html-copy');
 var copyFonts = require('ionic-gulp-fonts-copy');
 var copyScripts = require('ionic-gulp-scripts-copy');
 
-gulp.task('watch', ['clean'], function(done){
+gulp.task('images', function() {
+  return gulp.src('./app/images/**/*.*')
+    .pipe(gulp.dest('./www/build/images'));
+});
+
+gulp.task('watch', ['clean'], function(done) {
   runSequence(
-    ['sass', 'html', 'fonts', 'scripts'],
-    function(){
-      gulpWatch('app/**/*.scss', function(){ gulp.start('sass'); });
-      gulpWatch('app/**/*.html', function(){ gulp.start('html'); });
-      buildBrowserify({ watch: true }).on('end', done);
+    ['sass', 'images', 'html', 'fonts', 'scripts'],
+    function() {
+      gulpWatch('app/**/*.scss', function() {
+        gulp.start('sass');
+      });
+      gulpWatch('app/**/*.html', function() {
+        gulp.start('html');
+      });
+      buildBrowserify({
+        watch: true
+      }).on('end', done);
     }
   );
 });
 
-gulp.task('build', ['clean'], function(done){
+gulp.task('build', ['clean'], function(done) {
   runSequence(
-    ['sass', 'html', 'fonts', 'scripts'],
-    function(){
+    ['sass', 'images', 'html', 'fonts', 'scripts'],
+    function() {
       buildBrowserify().on('end', done);
     }
   );
 });
+
 gulp.task('sass', buildSass);
 gulp.task('html', copyHTML);
 gulp.task('fonts', copyFonts);
 gulp.task('scripts', copyScripts);
-gulp.task('clean', function(){
+gulp.task('clean', function() {
   return del('www/build');
 });

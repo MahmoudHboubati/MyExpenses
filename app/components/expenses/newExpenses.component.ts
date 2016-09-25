@@ -14,19 +14,17 @@ export class NewExpensesComponent {
   name: string;
   description: string;
   amount: number;
-  at: string;
 
   constructor(private _expensesService: ExpensesService) {
   }
 
-  addNew() {
-    var item: IExpenses = {
-      amount: this.amount,
-      at: this.at,
-      createdAt: new Date(),
-      isActive: true,
-      createdBy: '0'
-    };
-    this._expensesService.add(item);
-  }
+  // addNew() {
+  //   var item: IExpenses = {
+  //     amount: this.amount,
+  //     createdAt: new Date(),
+  //     isActive: true,
+  //     createdBy: '0'
+  //   };
+  //   this._expensesService.add(item);
+  // }
 }
