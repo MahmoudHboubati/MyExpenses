@@ -1,20 +1,48 @@
 
 import {Component} from '@angular/core';
-// import {PlannedExpensesService} from '../../core/services/plannedExpenses.service';
-import {IExpenses} from '../../core/domain/expenses.entity';
+import {ControlGroup, Control} from '@angular/common';
+import {PlannedExpensesService} from '../../core/services/plannedExpenses.service';
+import {IPlannedExpenses, PlannedExpenses} from '../../core/domain/plannedExpenses.entity';
+
+export abstract class FormComponent<TEntity> {
+  protected form = new ControlGroup(this.buildControls());
+  abstract buildControls();
+  abstract add();
+  abstract createEntity(): TEntity;
+}
 
 @Component({
   selector: 'new-planned-expenses',
   templateUrl: 'build/components/plannedExpenses/newPlannedExpenses.component.html',
-  // providers: [ExpensesService]
+  providers: [PlannedExpensesService]
 })
-export class NewPlannedExpensesComponent {
+export class NewPlannedExpensesComponent extends FormComponent<IPlannedExpenses> {
 
-  name: string;
   description: string;
   amount: number;
-  at: string;
 
-  constructor() {
+
+  constructor(private _plannedExpensesService: PlannedExpensesService) {
+    super();
+  }
+
+  buildControls() {
+    {
+      return {
+        description: new Control(),
+        amount: new Control(),
+      };
+    }
+  }
+
+  add() {
+    this._plannedExpensesService.add(this.createEntity());
+  }
+
+  createEntity(): IPlannedExpenses {
+    var entity: PlannedExpenses = new PlannedExpenses();
+    entity.description = this.description;
+    entity.startDate = new Date();
+    return entity;
   }
 }

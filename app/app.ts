@@ -3,7 +3,7 @@ import {Component} from '@angular/core';
 import {ionicBootstrap, Platform} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {HomePage} from './pages/home/home';
-
+import {AuthService} from './core/services/auth.service';
 
 
 import {
@@ -28,7 +28,8 @@ import {
             method: AuthMethods.Password,
             remember: 'default',
             scope: ['email']
-        })
+        }),
+        AuthService
     ]
 })
 export class MyApp {

@@ -2,7 +2,9 @@ import {AngularFire, FirebaseAuthState, AuthProviders, AuthMethods} from 'angula
 import {UserInfo} from 'firebase';
 import {Observable, Observer} from 'rxjs';
 import { Inject } from '@angular/core';
+import {Injectable} from '@angular/core';
 
+@Injectable()
 export class AuthService {
 
   constructor( @Inject(AngularFire) private af: AngularFire) {

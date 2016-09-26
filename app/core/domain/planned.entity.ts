@@ -2,13 +2,13 @@
 import {IGenericEntity, GenericEntity} from './generic.entity';
 
 export interface IPlanned extends IGenericEntity {
-    name: string;
+    // name: string;
     description: string;
     repeateEveryId: string;
 }
 
 export class Planned extends GenericEntity implements IPlanned {
-    name: string;
+    //name: string;
     description: string;
     repeateEveryId: string;
 }

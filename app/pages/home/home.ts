@@ -7,7 +7,6 @@ import {MomentDate} from '../../lib/MomentDate'
 import 'rxjs';
 
 import {NewPlannedExpensesComponent} from '../../components/plannedExpenses/newPlannedExpenses.component';
-
 import { AngularFire, AuthProviders, AuthMethods, FirebaseAuthState, FirebaseListObservable } from 'angularfire2';
 
 @Page({
