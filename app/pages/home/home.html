@@ -1,4 +1,4 @@
-<ion-navbar *navbar>
+<!-- <ion-navbar *navbar>
   <ion-title>
     Angular Fire Test App
   </ion-title>
@@ -8,7 +8,60 @@
             {{buttonTitle}}
         </button>
   </ion-buttons>
-</ion-navbar>
+</ion-navbar> -->
+
+<!-- <ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header> -->
+
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button>
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-segment>
+      <ion-segment-button value="new">
+        New
+      </ion-segment-button>
+      <ion-segment-button value="hot">
+        Hot
+      </ion-segment-button>
+    </ion-segment>
+    <ion-buttons end>
+      <button>
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-header>
+
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      Home
+    </ion-title>
+
+    <ion-buttons end>
+      <button (click)="openModal()">
+        <ion-icon name="options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
 
 <ion-content class="home">
   <new-planned-expenses></new-planned-expenses>
