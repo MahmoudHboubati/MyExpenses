@@ -30,7 +30,7 @@ import {
       scope: ['email']
     }),
     AuthService
-  ]
+  ],
 })
 export class MyApp {
   rootPage: any = TabsPage;

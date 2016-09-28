@@ -4,9 +4,11 @@ import { ModalController, NavController } from 'ionic-angular';
 // import {ExpensesService} from '../../core/services/expenses.service';
 import {IExpenses} from '../../core/domain/expenses.entity';
 // import {NewExpensesComponent} from '../../components/expenses/newExpenses.component';
+import {MainHeaderNavbarComponent} from '../../components/headerNavbar/mainHeaderNavbar.component';
 
 import {LoginPage} from '../login/login';
 // import {AuthService} from '../../core/services/auth.service';
+import {BasePage} from '../base/base.page';
 
 import {ChartDirective} from '../../components/charts/ChartJS.directive';
 import {IChartData, ChartData, LineChart} from '../../components/charts/chartjs.data';
@@ -15,9 +17,10 @@ import {IChartData, ChartData, LineChart} from '../../components/charts/chartjs.
 @Component({
   templateUrl: 'build/pages/home/home.html',
   // directives: [NewExpensesComponent, ChartDirective],
+  directives: [MainHeaderNavbarComponent]
   // providers: [ExpensesService]
 })
-export class HomePage {
+export class HomePage extends BasePage {
   expenses: any;
   authInfo: any;
   displayName: any;
@@ -32,6 +35,8 @@ export class HomePage {
     private _authService: AuthService*/) {
     // this.expenses = _expensesService.get();
     // this.authInfo = _authService.getAuthInfo();
+
+    super();
 
     this.lineChart = new LineChart();
 

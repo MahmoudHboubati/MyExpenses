@@ -1,15 +1,8 @@
-
 import {Component} from '@angular/core';
 import {ControlGroup, Control} from '@angular/common';
 import {PlannedExpensesService} from '../../core/services/plannedExpenses.service';
 import {IPlannedExpenses, PlannedExpenses} from '../../core/domain/plannedExpenses.entity';
-
-export abstract class FormComponent<TEntity> {
-  protected form = new ControlGroup(this.buildControls());
-  abstract buildControls();
-  abstract add();
-  abstract createEntity(): TEntity;
-}
+import {FormComponent} from '../base/formComponent.component';
 
 @Component({
   selector: 'new-planned-expenses',
