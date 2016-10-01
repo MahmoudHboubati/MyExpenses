@@ -1,8 +1,14 @@
-import {ControlGroup, Control} from '@angular/common';
+import {FormGroup} from '@angular/forms';
 
 export abstract class FormComponent<TEntity> {
-  protected form = new ControlGroup(this.buildControls());
-  abstract buildControls();
+
+  form: FormGroup;
+
+  abstract buildControls(): FormGroup;
   abstract add();
   abstract createEntity(): TEntity;
+
+  constructor() {
+    this.form = this.buildControls();
+  }
 }

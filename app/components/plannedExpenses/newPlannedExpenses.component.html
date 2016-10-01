@@ -1,18 +1,17 @@
-<ion-list>
-  <ion-item>
-    <ion-label stacked>Username</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label stacked>Password</ion-label>
-    <ion-input type="password"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label stacked>Amount</ion-label>
-    <ion-input type="number"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>Start Time</ion-label>
-    <ion-datetime displayFormat="DDD MMM YYYY" pickerFormat="DDD MMM YYYY"></ion-datetime>
-  </ion-item>
-</ion-list>
+<form [formGroup]="form" (ngSubmit)="add()">
+  <ion-list>
+    <ion-item>
+      <ion-label stacked>Description</ion-label>
+      <ion-input formControlName="description" type="text" [(ngModel)]="description"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Amount</ion-label>
+      <ion-input formControlName="amount" type="number" [(ngModel)]="amount"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Start Time</ion-label>
+      <ion-datetime formControlName="startDate" displayFormat="DDD MMM YYYY" pickerFormat="DDD MMM YYYY" [(ngModel)]="startDate"></ion-datetime>
+    </ion-item>
+  </ion-list>
+  <button type="submit" block>Add Todo</button>
+</form>

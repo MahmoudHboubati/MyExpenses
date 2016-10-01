@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {ControlGroup, Control} from '@angular/common';
 import {PlannedExpensesService} from '../../core/services/plannedExpenses.service';
 import {IPlannedExpenses, PlannedExpenses} from '../../core/domain/plannedExpenses.entity';
 import {FormComponent} from '../base/formComponent.component';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'new-planned-expenses',
@@ -13,19 +13,18 @@ export class NewPlannedExpensesComponent extends FormComponent<IPlannedExpenses>
 
   description: string;
   amount: number;
-
+  startDate: Date;
 
   constructor(private _plannedExpensesService: PlannedExpensesService) {
     super();
   }
 
-  buildControls() {
-    {
-      return {
-        description: new Control(),
-        amount: new Control(),
-      };
-    }
+  buildControls(): FormGroup {
+    return new FormGroup({
+      description: new FormControl('', Validators.required),
+      amount: new FormControl('', Validators.required),
+      startDate: new FormControl('', Validators.required)
+    });
   }
 
   add() {
@@ -34,8 +33,10 @@ export class NewPlannedExpensesComponent extends FormComponent<IPlannedExpenses>
 
   createEntity(): IPlannedExpenses {
     var entity: PlannedExpenses = new PlannedExpenses();
+    console.log('this.description: ' + this.description)
     entity.description = this.description;
-    entity.startDate = new Date();
+    entity.startDate = this.startDate;
+    entity.amount = this.amount;
     return entity;
   }
 }

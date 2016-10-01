@@ -16,8 +16,8 @@ import {IChartData, ChartData, LineChart} from '../../components/charts/chartjs.
 
 @Component({
   templateUrl: 'build/pages/home/home.html',
-  // directives: [NewExpensesComponent, ChartDirective],
-  directives: [MainHeaderNavbarComponent]
+  directives: [MainHeaderNavbarComponent, ChartDirective],
+  // directives: [MainHeaderNavbarComponent]
   // providers: [ExpensesService]
 })
 export class HomePage extends BasePage {
@@ -25,6 +25,7 @@ export class HomePage extends BasePage {
   authInfo: any;
   displayName: any;
   buttonTitle = "LOGIN";
+  // headerPageTitle: string = "Home";
 
   // data: Observable<IChartData>;
   lineChart: LineChart;
@@ -36,7 +37,7 @@ export class HomePage extends BasePage {
     // this.expenses = _expensesService.get();
     // this.authInfo = _authService.getAuthInfo();
 
-    super();
+    super("Home");
 
     this.lineChart = new LineChart();
 

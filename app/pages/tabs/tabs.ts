@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
-import { HomePage } from '../home/home';
-import { AboutPage } from '../about/about';
-import { ContactPage } from '../contact/contact';
-import {PlannedExpensesPage} from '../plannedExpenses/plannedExpenses.page';
+import {Component} from'@angular/core';
+import {HomePage} from'../home/home';
+import {AboutPage} from'../about/about';
+import {ContactPage} from'../contact/contact';
+import {PlannedExpensesPage} from'../plannedExpenses/plannedExpenses.page';
+import {MainHeaderNavbarComponent} from'../../components/headerNavbar/mainHeaderNavbar.component';
 
 @Component({
-  templateUrl: 'build/pages/tabs/tabs.html'
+  templateUrl: 'build/pages/tabs/tabs.html',
+  directives: [MainHeaderNavbarComponent]
 })
 export class TabsPage {
 

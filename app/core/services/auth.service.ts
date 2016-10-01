@@ -37,40 +37,40 @@ export class AuthService {
   login(credentials, setUserObject, loggedInSucceeded?, loginFailed?) {
     // login usig the email/password auth provider
     console.log('isUnsubscribed: ' + this.af.auth.isUnsubscribed);
-    // this.af.auth.login(credentials, {
-    //   provider: AuthProviders.Password,
-    //   method: AuthMethods.Password
-    // }).then((authData) => {
-    //
-    //   this.setAuthInfo(authData);
-    //
-    //   console.log(authData);
-    //
-    //   if (setUserObject) {
-    //     const itemObservable = this.af.database.object('/users/' + authData.uid);
-    //     itemObservable.set({
-    //       "provider": authData.auth.providerData[0].providerId,
-    //       "avatar": authData.auth.photoURL || "MISSING",
-    //       "displayName": authData.auth.providerData[0].displayName || authData.auth.email,
-    //     });
-    //
-    //   } else {
-    //     // this.dismiss()
-    //   }
-    //
-    //   if (loggedInSucceeded) {
-    //     var userInfo: IUserInfo = this.createUserInfo();
-    //     loggedInSucceeded(userInfo);
-    //   }
-    //
-    // }).then((value) => {
-    //   // this.dismiss()
-    // }).catch((error) => {
-    //   // this.error = error
-    //   // console.log(error);
-    //   if (loginFailed)
-    //     loginFailed(error);
-    // });
+    this.af.auth.login(credentials, {
+      provider: AuthProviders.Password,
+      method: AuthMethods.Password
+    }).then((authData) => {
+
+      this.setAuthInfo(authData);
+
+      console.log(authData);
+
+      if (setUserObject) {
+        const itemObservable = this.af.database.object('/users/' + authData.uid);
+        itemObservable.set({
+          "provider": authData.auth.providerData[0].providerId,
+          "avatar": authData.auth.photoURL || "MISSING",
+          "displayName": authData.auth.providerData[0].displayName || authData.auth.email,
+        });
+
+      } else {
+        // this.dismiss()
+      }
+
+      if (loggedInSucceeded) {
+        var userInfo: IUserInfo = this.createUserInfo();
+        loggedInSucceeded(userInfo);
+      }
+
+    }).then((value) => {
+      // this.dismiss()
+    }).catch((error) => {
+      // this.error = error
+      // console.log(error);
+      if (loginFailed)
+        loginFailed(error);
+    });
   }
 
   private createUserInfo(): IUserInfo {
@@ -78,55 +78,55 @@ export class AuthService {
   }
 
   private setAuthInfo(authData: FirebaseAuthState) {
-    // this.authInfo = authData.auth.providerData[0];
+    this.authInfo = authData.auth.providerData[0];
   }
 
   public isAuthenticated(unsubscribeIfSucceeded: boolean, authenticated: Function, notAuthenticated: Function) {
-    // this.af.auth.subscribe((data: FirebaseAuthState) => {
-    //
-    //   // console.log("checking authentication", data);
-    //
-    //   this.uid = data ? data.uid : '';
-    //
-    //   if (data && !data.anonymous) {
-    //
-    //     if (unsubscribeIfSucceeded)
-    //       this.af.auth.unsubscribe();
-    //
-    //     this.setAuthInfo(data);
-    //
-    //     // this.buttonTitle = "LOGOUT"
-    //
-    //     // // if no user, then add it
-    //     // this.addOrUpdateUser(data);
-    //
-    //     // if (data.auth.providerData[0].providerId === "twitter.com") {
-    //     //   this.authInfo = data.auth.providerData[0]
-    //     //   this.displayName = data.auth.providerData[0].displayName
-    //     // } else if (data.github) {
-    //     //   this.authInfo = data.github
-    //     //   // this.authInfo.displayName = data.github.displayName;
-    //     // } else {
-    //     //   this.authInfo = data.auth || {}
-    //     //   this.displayName = data.auth.providerData[0].email
-    //     // }
-    //     // this.textItems = this.af.database.list('/textItems')
-    //
-    //     //this.getMoreData()
-    //
-    //     if (authenticated) {
-    //       authenticated(data);
-    //     }
-    //
-    //   } else {
-    //     // this.buttonTitle = "LOGIN"
-    //     // this.authInfo = null
-    //     // this.displayLoginModal();
-    //     // this.navCtrl.setRoot(LoginPage, { af: this.af }, () => { console.log('done') });
-    //     if (notAuthenticated)
-    //       notAuthenticated(data);
-    //   }
-    // });
+    this.af.auth.subscribe((data: FirebaseAuthState) => {
+
+      // console.log("checking authentication", data);
+
+      this.uid = data ? data.uid : '';
+
+      if (data && !data.anonymous) {
+
+        if (unsubscribeIfSucceeded)
+          this.af.auth.unsubscribe();
+
+        this.setAuthInfo(data);
+
+        // this.buttonTitle = "LOGOUT"
+
+        // // if no user, then add it
+        // this.addOrUpdateUser(data);
+
+        // if (data.auth.providerData[0].providerId === "twitter.com") {
+        //   this.authInfo = data.auth.providerData[0]
+        //   this.displayName = data.auth.providerData[0].displayName
+        // } else if (data.github) {
+        //   this.authInfo = data.github
+        //   // this.authInfo.displayName = data.github.displayName;
+        // } else {
+        //   this.authInfo = data.auth || {}
+        //   this.displayName = data.auth.providerData[0].email
+        // }
+        // this.textItems = this.af.database.list('/textItems')
+
+        //this.getMoreData()
+
+        if (authenticated) {
+          authenticated(data);
+        }
+
+      } else {
+        // this.buttonTitle = "LOGIN"
+        // this.authInfo = null
+        // this.displayLoginModal();
+        // this.navCtrl.setRoot(LoginPage, { af: this.af }, () => { console.log('done') });
+        if (notAuthenticated)
+          notAuthenticated(data);
+      }
+    });
   }
 
   addOrUpdateUser(_authData) {

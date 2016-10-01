@@ -9,6 +9,7 @@ import {BasePage} from '../base/base.page';
 })
 export class AboutPage extends BasePage {
   constructor(public navCtrl: NavController) {
-    super();
+    super("About");
   }
+  // headerPageTitle: string = "About";
 }
