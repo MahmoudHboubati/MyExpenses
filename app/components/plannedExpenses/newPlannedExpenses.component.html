@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="add()">
+<form [formGroup]="form" (ngSubmit)="add()" #planForm="ngForm">
   <ion-list>
     <ion-item>
       <ion-label stacked>Description</ion-label>
@@ -13,5 +13,5 @@
       <ion-datetime formControlName="startDate" displayFormat="DDD MMM YYYY" pickerFormat="DDD MMM YYYY" [(ngModel)]="startDate"></ion-datetime>
     </ion-item>
   </ion-list>
-  <button type="submit" block>Add Todo</button>
+  <button type="submit" [disabled]="!planForm.form.valid" block>Add Todo</button>
 </form>

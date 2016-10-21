@@ -2,6 +2,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ionicBootstrap, Platform} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
+import {UserInfo} from 'firebase';
 
 import {
   FIREBASE_PROVIDERS, defaultFirebase,
@@ -48,14 +49,13 @@ export class MyApp implements OnInit {
   }
 
   ngOnInit() {
-    //this will register to the auth Observable to reponds whenever changes (login/out)
-    // this.rootPage = TabsPage;
-    this._authService.isAuthenticated(false,
-      (authState: FirebaseAuthState) => {
+    this.af.auth.subscribe(auth => {
+      if (auth) {
         this.rootPage = TabsPage;
-      }, (authState: FirebaseAuthState) => {
+      } else {
         this.rootPage = LoginPage;
-      });
+      }
+    });
   }
 
   /**
@@ -63,7 +63,6 @@ export class MyApp implements OnInit {
  */
   logout() {
     this._authService.logout();
-    // this.rootPage = LoginPage;
   }
 }
 

@@ -88,19 +88,27 @@ export class LoginPage {
     let addUser = credentials.created;
     credentials.created = null;
 
-    // console.log('hi')
-    // console.log(credentials, addUser);
+    var userEmail = credentials.email;
+    var password = credentials.password;
 
-    this._authService.login(credentials, addUser, this.loggedInSucceeded, this.loginFailed);
+    var promis = this._authService.login(userEmail, password);
+
+    promis.then((a: firebase.User) => {
+      this.loggedInSucceeded(a);
+    }).catch((e: Error) => {
+      this.loginFailed(e);
+    });
   }
 
   loginFailed(error) {
-    // this.notAbleToLogin = error.
   }
 
   loggedInSucceeded(userInfo: IUserInfo) {
-    this.userInfo = userInfo;
-    this._navCtrl.push(TabsPage);
+    try {
+      this._navCtrl.push(TabsPage);
+    }
+    catch (e) {
+    }
   }
 
 

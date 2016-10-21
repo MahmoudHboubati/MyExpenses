@@ -2,7 +2,7 @@ import {Component} from'@angular/core';
 import {HomePage} from'../home/home';
 import {AboutPage} from'../about/about';
 import {ContactPage} from'../contact/contact';
-import {PlannedExpensesPage} from'../plannedExpenses/plannedExpenses.page';
+import {ListPlannedExpensesPage} from'../plannedExpenses/listPlannedExpenses.page';
 import {MainHeaderNavbarComponent} from'../../components/headerNavbar/mainHeaderNavbar.component';
 
 @Component({
@@ -22,6 +22,6 @@ export class TabsPage {
     this.homePage = HomePage;
     this.aboutPage = AboutPage;
     this.contactPage = ContactPage;
-    this.plannedExpensesPage = PlannedExpensesPage;
+    this.plannedExpensesPage = ListPlannedExpensesPage;
   }
 }
