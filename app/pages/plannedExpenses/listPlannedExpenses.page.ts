@@ -19,6 +19,6 @@ export class ListPlannedExpensesPage extends BasePage implements OnInit {
   }
 
   addPageClick() {
-    this.navCtrl.setRoot(NewPlannedExpensesPage);
+    this.navCtrl.push(NewPlannedExpensesPage);
   }
 }

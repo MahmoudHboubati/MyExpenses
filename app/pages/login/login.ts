@@ -82,7 +82,7 @@ export class LoginPage {
    */
   login(credentials, _event) {
     _event.preventDefault();
-
+    console.log('hi')
     // if this was called from the register user,  the check if we
     // need to create the user object or not
     let addUser = credentials.created;
@@ -103,9 +103,8 @@ export class LoginPage {
   loginFailed(error) {
   }
 
-  loggedInSucceeded(userInfo: IUserInfo) {
+  loggedInSucceeded(userInfo: firebase.User) {
     try {
-      this._navCtrl.push(TabsPage);
     }
     catch (e) {
     }

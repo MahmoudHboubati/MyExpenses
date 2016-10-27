@@ -16,6 +16,9 @@ export class MainHeaderNavbarComponent {
   addPageClick: Function;
 
   @Input()
+  backPageClick: Function;
+
+  @Input()
   public addPage: any;
 
   @Input()
@@ -23,11 +26,7 @@ export class MainHeaderNavbarComponent {
 
   constructor(public navCtrl: NavController) {
   }
-  goBack() {
-    this.navCtrl.pop();
-  }
   goToAddPage() {
-    console.log(this.addPageClick)
     this.addPageClick();
   }
 }

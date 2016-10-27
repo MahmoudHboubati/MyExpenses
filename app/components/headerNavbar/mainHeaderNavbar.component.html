@@ -9,14 +9,16 @@
   </ion-navbar> -->
 
 <ion-navbar>
-  <button menuToggle *ngIf="menuToggle">
-      <ion-icon name="menu"></ion-icon>
+  <ion-buttons left>
+    <button menuToggle icon-only ion-button *ngIf="menuToggle">
+        <ion-icon name="menu"></ion-icon>
     </button>
+  </ion-buttons>
   <ion-title>
     {{headerPageTitle}}
   </ion-title>
-  <ion-buttons end>
-    <button *ngIf="addPageClick" ion-button (click)="goToAddPage()">
+  <ion-buttons right>
+    <button icon-only *ngIf="addPageClick" ion-button (click)="goToAddPage()">
         <ion-icon  name="add-circle"></ion-icon>
     </button>
   </ion-buttons>
