@@ -1,15 +1,16 @@
 import * as Chart from 'chart.js';
 import {Directive, ElementRef, Renderer, Input} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {IChartData} from './chartjs.data';
+import {IChartData, ChartDataBasic} from './chartjs.data';
+import {AfterViewInit} from '@angular/core';
 
 @Directive({
   selector: '[chart]'
 })
-export class ChartDirective {
+export class ChartDirective implements AfterViewInit {
 
   @Input()
-  chData: Observable<IChartData>;
+  cd: Observable<ChartDataBasic>;
 
   lineChart: any;
   options: any = {
@@ -26,21 +27,12 @@ export class ChartDirective {
   }
 
   ngAfterViewInit() {
-    // var myArray = this.chData.subscribe((array) => {
-    //   var data = this.buildChartData(array);
-    //   this.renderTheChart(data);
-    // });
-  }
-
-  buildChartData(array) {
-    return {
-      labels: array.labels,
-      datasets: [{
-        label: '# of Expenses',
-        data: array.data,
-        borderWidth: 1
-      }]
-    };
+    this.cd.subscribe((cdData) => {
+      if(this.lineChart){
+        this.lineChart.destroy();
+      }
+      this.renderTheChart(cdData.data);
+    });
   }
 
   renderTheChart(data) {

@@ -1,6 +1,7 @@
 <ion-list>
   <ion-item *ngFor="let plaExp of plannedExpenses | async; let i = index">
-    Description: {{plaExp.description}} <br>
-    Amound: {{plaExp.amount}}
+    Description: {{plaExp.description}} <br />
+    Amound: {{plaExp.amount}} <br />
+    Start: {{plaExp.startDate | date}} <br />
   </ion-item>
 </ion-list>

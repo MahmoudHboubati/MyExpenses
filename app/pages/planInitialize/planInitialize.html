@@ -1,0 +1,41 @@
+<ion-header>
+  <main-header-navbar headerPageTitle="{{headerPageTitle}}" menuToggle="true"></main-header-navbar>
+</ion-header>
+
+<ion-content class="dashboard" padding>
+  <ion-row class="row">
+    <ion-col class="col">
+      <canvas chart [cd]="lineChart" [hidden]="!form.valid"></canvas>
+    </ion-col>
+  </ion-row>
+  <ion-row class="row">
+    <ion-col class="col">
+      <form [formGroup]="form" (ngSubmit)="add()" #planForm="ngForm">
+        <ion-list>
+          <ion-item>
+            <ion-label stacked>Incomes</ion-label>
+            <ion-input formControlName="incomes" type="number" [(ngModel)]="incomes"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>Expenses</ion-label>
+            <ion-input formControlName="expenses" type="number" [(ngModel)]="expenses"></ion-input>
+          </ion-item>
+          <ion-item (click)="showDetails=!showDetails">
+            <ion-icon ios="ios-arrow-dropdown" md="md-arrow-dropdown" *ngIf="!showDetails"></ion-icon>
+            <ion-icon ios="ios-arrow-dropup" md="md-arrow-dropup" *ngIf="showDetails"></ion-icon>
+          </ion-item>
+          <ion-item *ngIf="showDetails">
+            <ion-label stacked>Initial</ion-label>
+            <ion-input formControlName="initial" type="number" [(ngModel)]="initial"></ion-input>
+          </ion-item>
+          <ion-item>
+            <button ion-button icon-right clear>
+              Next
+             <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
+            </button>
+          </ion-item>
+        </ion-list>
+      </form>
+    </ion-col>
+  </ion-row>
+</ion-content>

@@ -12,13 +12,11 @@ import {LoginPage} from '../login/login';
 // import {AuthService} from '../../core/services/auth.service';
 import {BasePage} from '../base/base.page';
 
-import {ChartDirective} from '../../components/charts/ChartJS.directive';
-import {IChartData, ChartData, LineChart} from '../../components/charts/chartjs.data';
 // import {Observable} from 'rxjs';
 
 @Component({
   templateUrl: 'build/pages/home/home.html',
-  directives: [MainHeaderNavbarComponent, ChartDirective],
+  directives: [MainHeaderNavbarComponent],
   // directives: [MainHeaderNavbarComponent]
   // providers: [ExpensesService]
 })
@@ -31,9 +29,6 @@ export class HomePage extends BasePage {
   form: FormGroup;
 
   // headerPageTitle: string = "Home";
-
-  // data: Observable<IChartData>;
-  lineChart: LineChart;
 
   constructor(public navCtrl: NavController,
     // private _expensesService: ExpensesService,
@@ -49,31 +44,6 @@ export class HomePage extends BasePage {
         amount: new FormControl('', Validators.required),
 
       });
-
-
-
-    this.lineChart = new LineChart();
-
-    // this.data = this.expenses.map((next) => {
-    //
-    //   var months: any[] = [];
-    //   var totalExpenses: number[] = [];
-    //
-    //   Observable.from<IExpenses>(next).groupBy((k) => {
-    //     return new Date(k.at).getMonth() + 1;
-    //   }).map((a) => {
-    //     months.push(a.key);
-    //     var sum = 0;
-    //     a.subscribe((s) => {
-    //       sum += s.amount;
-    //     }, () => { }, () => {
-    //       totalExpenses.push(sum);
-    //     });
-    //   }).subscribe();
-    //
-    //   var chartData: ChartData = new ChartData(totalExpenses, months.sort());
-    //   return chartData;
-    // });
   }
 
   /**
